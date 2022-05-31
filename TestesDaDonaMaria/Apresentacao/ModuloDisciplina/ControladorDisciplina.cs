@@ -7,27 +7,25 @@ using System.Windows.Forms;
 using TestesDaDonaMaria.Apresentacao.Compartilhado;
 using TestesDaDonaMaria.Apresentacao.ModuloDisciplina;
 using TestesDaDonaMaria.Dominio;
+using TestesDaDonaMaria.Dominio.ModuloDisciplina;
 using TestesDaDonaMaria.Infra;
-using TestesDaDonaMaria.Infra.ModuloDisciplina;
 
 namespace TestesDaDonaMaria.Apresentacao.ModuloDisciplina
 {
     public class ControladorDisciplina : ControladorBase
     {
 
-        private RepositorioDisciplina repositorioDisciplina;
+        private IRepositorioDisciplina repositorioDisciplina;
         private ListagemDisciplinasControl listagemDisciplinas;
 
-        public RepositorioDisciplinaEmBancoDeDados RepositorioDisciplina { get; }
-
-        public ControladorDisciplina(RepositorioDisciplina repositorioDisciplina)
+        public ControladorDisciplina(IRepositorioDisciplina repositorioDisciplina)
         {
             this.repositorioDisciplina = repositorioDisciplina;
         }
 
-        public override void Editar()
+        public override void Editar(/*Materia disciplinaSelecionada*/)
         {
-            Materia disciplinaSelecionada = listagemDisciplinas.ObtemDisciplinaSelecionada();
+            Disciplina disciplinaSelecionada = ObtemDisciplinaSelecionada();
 
             if (disciplinaSelecionada == null)
             {
@@ -38,7 +36,7 @@ namespace TestesDaDonaMaria.Apresentacao.ModuloDisciplina
            
             TelaCadastroDisciplinaForm tela = new TelaCadastroDisciplinaForm();
 
-            tela.Disciplina = disciplinaSelecionada;
+            tela.Disciplina = disciplinaSelecionada.Clonar();
 
             tela.GravarRegistro = repositorioDisciplina.Editar;
 
@@ -50,9 +48,16 @@ namespace TestesDaDonaMaria.Apresentacao.ModuloDisciplina
             }
         }
 
+        private Disciplina ObtemDisciplinaSelecionada()
+        {
+            var numero = listagemDisciplinas.ObtemDisciplinaSelecionada().Numero;
+
+            return repositorioDisciplina.SelecionarPorNumero(numero);
+        }
+
         public override void Excluir()
         {
-            Materia disciplinaSelecionada = listagemDisciplinas.ObtemDisciplinaSelecionada();
+            Disciplina disciplinaSelecionada = ObtemDisciplinaSelecionada();
 
             if (disciplinaSelecionada == null)
             {
@@ -80,7 +85,7 @@ namespace TestesDaDonaMaria.Apresentacao.ModuloDisciplina
             }
         }
 
-        private string ValidarExclusao(Materia disciplinaSelecionada)
+        private string ValidarExclusao(Disciplina disciplinaSelecionada)
         {
             string validacao = "";
 
@@ -95,7 +100,7 @@ namespace TestesDaDonaMaria.Apresentacao.ModuloDisciplina
         {
             TelaCadastroDisciplinaForm tela = new TelaCadastroDisciplinaForm();
             
-            tela.Disciplina = new Materia();
+            tela.Disciplina = new Disciplina();
 
             tela.GravarRegistro = repositorioDisciplina.Inserir;
 
@@ -111,7 +116,7 @@ namespace TestesDaDonaMaria.Apresentacao.ModuloDisciplina
 
         private void CarregarDisciplinas()
         {
-            var disciplinas = repositorioDisciplina.ObterRegistros();
+            var disciplinas = repositorioDisciplina.SelecionarTodos();
 
             listagemDisciplinas.AtualizarRegistros(disciplinas);
         }

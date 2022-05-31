@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TestesDaDonaMaria.Dominio.Compartilhado;
 
 namespace TestesDaDonaMaria.Dominio
 {
@@ -25,7 +26,7 @@ namespace TestesDaDonaMaria.Dominio
 
         public override string ToString()
         {
-            return $"Enunciado: {Enunciado}, Materia: {Materia.Titulo}";
+            return $"Enunciado: {Enunciado}, Materia: {Materia.Nome}";
         }
 
     }

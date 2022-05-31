@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TestesDaDonaMaria.Dominio;
+using TestesDaDonaMaria.Dominio.Compartilhado;
 
 namespace TestesDaDonaMaria.Infra
 {
@@ -43,7 +43,7 @@ namespace TestesDaDonaMaria.Infra
             return resultadoValidacao;
         }
 
-        public ValidationResult Editar(T registro)
+        public virtual ValidationResult Editar(T registro)
         {
             var validator = ObterValidador();
 
@@ -67,7 +67,7 @@ namespace TestesDaDonaMaria.Infra
 
         }
 
-        public ValidationResult Excluir(T registro)
+        public virtual ValidationResult Excluir(T registro)
         {
             var resultadoValidacao = new ValidationResult();
 

@@ -10,7 +10,9 @@ using TestesDaDonaMaria.Infra;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using System.IO;
-using TestesDaDonaMaria.Infra.ModuloDisciplina;
+using TestesDaDonaMaria.Infra.Banco_de_Dados.ModuloDisciplina;
+using TestesDaDonaMaria.Dominio.ModuloMateria;
+using TestesDaDonaMaria.Dominio.ModuloDisciplina;
 
 namespace TestesDaDonaMaria.Apresentacao.ModuloTeste
 {
@@ -18,26 +20,18 @@ namespace TestesDaDonaMaria.Apresentacao.ModuloTeste
     {
         private RepositorioTeste repositorioTeste;
         private RepositorioQuestao repositorioQuestao;
-        private RepositorioMateria repositorioMateria;
-        private RepositorioDisciplina repositorioDisciplina;
+        private IRepositorioMateria repositorioMateria;
+        private IRepositorioDisciplina repositorioDisciplina;
         private ListagemTestesControl listagemTestes;
 
         public RepositorioDisciplinaEmBancoDeDados RepositorioDisciplina { get; }
 
-        public ControladorTeste(RepositorioTeste repositorioTeste, RepositorioQuestao repositorioQuestao, RepositorioDisciplina repositorioDisciplina, RepositorioMateria repositorioMateria)
+        public ControladorTeste(RepositorioTeste repositorioTeste, RepositorioQuestao repositorioQuestao, IRepositorioDisciplina repositorioDisciplina, IRepositorioMateria repositorioMateria)
         {
             this.repositorioMateria = repositorioMateria;
             this.repositorioQuestao = repositorioQuestao;
             this.repositorioDisciplina = repositorioDisciplina;
             this.repositorioTeste = repositorioTeste;
-        }
-
-        public ControladorTeste(RepositorioTeste repositorioTeste, RepositorioQuestao repositorioQuestao, RepositorioDisciplinaEmBancoDeDados repositorioDisciplina1, RepositorioMateria repositorioMateria)
-        {
-            this.repositorioTeste = repositorioTeste;
-            this.repositorioQuestao = repositorioQuestao;
-            RepositorioDisciplina = repositorioDisciplina1;
-            this.repositorioMateria = repositorioMateria;
         }
 
         public override void Editar()

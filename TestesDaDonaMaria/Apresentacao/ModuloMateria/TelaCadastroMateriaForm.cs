@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using TestesDaDonaMaria.Dominio;
 using TestesDaDonaMaria.Infra;
+using TestesDaDonaMaria.Dominio.ModuloMateria;
 
 namespace TestesDaDonaMaria.Apresentacao.ModuloMateria
 {
@@ -26,17 +27,22 @@ namespace TestesDaDonaMaria.Apresentacao.ModuloMateria
             this.repositorioDisciplina = repositorioDisciplina;
 
             
-                List<Materia> listaDisciplinas = repositorioDisciplina.SelecionarTodos();
+                List<Disciplina> listaDisciplinas = repositorioDisciplina.SelecionarTodos();
 
                 InicializarCbx(listaDisciplinas);
             
         }
 
+        public TelaCadastroMateriaForm(IRepositorioMateria repositorioMateria)
+        {
+            RepositorioMateria = repositorioMateria;
+        }
+
         public Func<Materia, ValidationResult> GravarRegistro { get; set; }
 
-        private void InicializarCbx(List<Materia> listaDisciplinas)
+        private void InicializarCbx(List<Disciplina> listaDisciplinas)
         {
-            foreach (Materia d in listaDisciplinas)
+            foreach (Disciplina d in listaDisciplinas)
                 cbxDisciplina.Items.Add(d);
         }
 
@@ -61,15 +67,17 @@ namespace TestesDaDonaMaria.Apresentacao.ModuloMateria
 
                 
                 txtNumero.Text = materia.Numero.ToString();
-                txtTitulo.Text = materia.Titulo; 
+                txtTitulo.Text = materia.Nome; 
                 cbxDisciplina.SelectedItem = materia.Disciplina;
             }
         }
 
+        public IRepositorioMateria RepositorioMateria { get; }
+
         private void btnCadastrar_Click(object sender, EventArgs e)
         {
-            materia.Titulo = txtTitulo.Text;
-            materia.Disciplina = (Materia)cbxDisciplina.SelectedItem; 
+            materia.Nome = txtTitulo.Text;
+            materia.Disciplina = (Disciplina)cbxDisciplina.SelectedItem; 
             if (rbPrimeira.Checked == true)
                 materia.Serie = Serie.Primeira;
 

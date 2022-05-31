@@ -1,33 +1,38 @@
 ﻿using System.Collections.Generic;
+using TestesDaDonaMaria.Dominio.Compartilhado;
 
 namespace TestesDaDonaMaria.Dominio
 {
-    public class Materia : EntidadeBase<Materia>
+    public class Disciplina : EntidadeBase<Disciplina>
     {
-       
+
         private List<Materia> materias = new List<Materia>();
 
 
         public string Nome { get; set; }
         public List<Materia> Materias { get { return materias; } }
 
-        public override void Atualizar(Materia registro)
+        public override void Atualizar(Disciplina registro)
         {
-            
+
         }
 
         public override string ToString()
         {
             string materiasToString = "";
-            
+
             if (Materias != null)
             {
                 foreach (var materia in Materias)
-                    materiasToString += materia.Titulo + ", ";
+                    materiasToString += materia.Nome + ", ";
             }
-            
-            
+
+
             return $"Número: {Numero}, Nome: {Nome}";
+        }
+        internal Disciplina Clonar()
+        {
+            return MemberwiseClone() as Disciplina;
         }
     }
 }

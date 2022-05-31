@@ -6,19 +6,20 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using TestesDaDonaMaria.Apresentacao.Compartilhado;
 using TestesDaDonaMaria.Dominio;
+using TestesDaDonaMaria.Dominio.ModuloDisciplina;
+using TestesDaDonaMaria.Dominio.ModuloMateria;
 using TestesDaDonaMaria.Infra;
-using TestesDaDonaMaria.Infra.ModuloDisciplina;
 
 namespace TestesDaDonaMaria.Apresentacao.ModuloQuestao
 {
     public class ControladorQuestao : ControladorBase
     {
         private RepositorioQuestao repositorioQuestao;
-        private RepositorioMateria repositorioMateria;
-        private RepositorioDisciplina repositorioDisciplina;
+        private IRepositorioMateria repositorioMateria;
+        private IRepositorioDisciplina repositorioDisciplina;
         private ListagemQuestoesControl listagemQuestao;
 
-        public ControladorQuestao(RepositorioQuestao repositorioQuestao, RepositorioDisciplina repositorioDisciplina, RepositorioMateria repositorioMateria)
+        public ControladorQuestao(RepositorioQuestao repositorioQuestao, IRepositorioDisciplina repositorioDisciplina, IRepositorioMateria repositorioMateria)
         {
             this.repositorioMateria = repositorioMateria;
             this.repositorioQuestao = repositorioQuestao;

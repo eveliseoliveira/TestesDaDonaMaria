@@ -1,4 +1,4 @@
-﻿namespace TestesDaDonaMaria.Dominio
+﻿namespace TestesDaDonaMaria.Dominio.Compartilhado
 {
     public abstract class EntidadeBase<T>
     {

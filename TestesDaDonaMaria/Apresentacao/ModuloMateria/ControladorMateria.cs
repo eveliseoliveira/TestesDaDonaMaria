@@ -6,18 +6,23 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using TestesDaDonaMaria.Apresentacao.Compartilhado;
 using TestesDaDonaMaria.Dominio;
+using TestesDaDonaMaria.Dominio.ModuloDisciplina;
+using TestesDaDonaMaria.Dominio.ModuloMateria;
 using TestesDaDonaMaria.Infra;
-using TestesDaDonaMaria.Infra.ModuloDisciplina;
+using TestesDaDonaMaria.Infra.Banco_de_Dados.ModuloDisciplina;
+using TestesDaDonaMaria.Infra.Banco_de_Dados.ModuloMateria;
 
 namespace TestesDaDonaMaria.Apresentacao.ModuloMateria
 {
     public class ControladorMateria : ControladorBase
     {
-        private RepositorioDisciplina repositorioDisciplina;
-        private RepositorioMateria repositorioMateria;
+        private IRepositorioDisciplina repositorioDisciplina;
+        private IRepositorioMateria repositorioMateria;
         private ListagemMateriaControl listagemMaterias;
+        private RepositorioMateriaEmBancoDeDados repositorioMateria1;
+        private RepositorioDisciplinaEmBancoDeDados repositorioDisciplina1;
 
-        public ControladorMateria(RepositorioMateria repositorioMateria, RepositorioDisciplina repositorioDisciplina)
+        public ControladorMateria(IRepositorioMateria repositorioMateria, IRepositorioDisciplina repositorioDisciplina)
         {
             this.repositorioMateria = repositorioMateria;
             this.repositorioDisciplina = repositorioDisciplina;
@@ -34,7 +39,7 @@ namespace TestesDaDonaMaria.Apresentacao.ModuloMateria
                 return;
             }
 
-            TelaCadastroMateriaForm tela = new TelaCadastroMateriaForm(repositorioDisciplina);
+            TelaCadastroMateriaForm tela = new TelaCadastroMateriaForm(repositorioMateria);
 
             tela.Materia = materiaSelecionada;
 
@@ -51,7 +56,9 @@ namespace TestesDaDonaMaria.Apresentacao.ModuloMateria
 
         private void CarregarMaterias()
         {
-            var materias = repositorioMateria.ObterRegistros();
+            //var materias = repositorioMateria.ObterRegistros();
+
+            var materias = repositorioMateria.SelecionarTodos();
 
             listagemMaterias.AtualizarRegistros(materias);
         }
@@ -79,7 +86,7 @@ namespace TestesDaDonaMaria.Apresentacao.ModuloMateria
 
         public override void Inserir()
         {
-            TelaCadastroMateriaForm tela = new TelaCadastroMateriaForm(repositorioDisciplina);
+            TelaCadastroMateriaForm tela = new TelaCadastroMateriaForm(repositorioMateria);
            
             tela.Materia = new Materia();
 

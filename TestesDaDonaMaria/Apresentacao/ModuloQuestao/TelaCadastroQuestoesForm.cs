@@ -105,11 +105,11 @@ namespace TestesDaDonaMaria.Apresentacao.ModuloQuestao
         private void cbxDisciplina_SelectedIndexChanged(object sender, EventArgs e)
         {
             cbxMateria.Enabled = true;
-            Materia disciplina = (Materia)cbxDisciplina.SelectedItem;
+            Disciplina disciplina = (Disciplina)cbxDisciplina.SelectedItem;
             InicializarCbxMateria(repositorioMateria, disciplina);
         }
 
-        private void InicializarCbxMateria(RepositorioMateria repositorioMateria, Materia disciplina)
+        private void InicializarCbxMateria(RepositorioMateria repositorioMateria, Disciplina disciplina)
         {
             cbxMateria.Items.Clear();
 

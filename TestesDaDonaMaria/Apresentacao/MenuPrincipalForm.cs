@@ -14,7 +14,8 @@ using TestesDaDonaMaria.Apresentacao.ModuloQuestao;
 using TestesDaDonaMaria.Apresentacao.ModuloTeste;
 using TestesDaDonaMaria.Infra.Banco_de_Dados.ModuloDisciplina;
 using TestesDaDonaMaria.Infra.Banco_de_Dados.ModuloMateria;
-
+using TestesDaDonaMaria.Dominio.ModuloDisciplina;
+using TestesDaDonaMaria.Dominio.ModuloMateria;
 
 namespace TestesDaDonaMaria.Apresentacao.ModuloDisciplina
 {
@@ -37,8 +38,8 @@ namespace TestesDaDonaMaria.Apresentacao.ModuloDisciplina
 
         private void InicializarControladores()
         {
-            var repositorioDisciplina = new RepositorioDisciplinaEmBancoDeDados();
-            var repositorioMateria = new RepositorioMateria(contextoDados);
+            IRepositorioDisciplina repositorioDisciplina = new RepositorioDisciplinaEmBancoDeDados();
+            IRepositorioMateria repositorioMateria = new RepositorioMateriaEmBancoDeDados();
             var repositorioQuestao = new RepositorioQuestao(contextoDados);
             var repositorioTeste = new RepositorioTeste(contextoDados);
 
@@ -112,7 +113,7 @@ namespace TestesDaDonaMaria.Apresentacao.ModuloDisciplina
             {
                 return;
             }
-            controlador.Editar();
+            controlador.Editar(/*disciplinaSelecionada*/);
         }
 
         private void btnExcluir_Click(object sender, EventArgs e)

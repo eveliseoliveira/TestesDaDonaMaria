@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TestesDaDonaMaria.Dominio
 {
-    public class ValidadorDisciplina : AbstractValidator<Materia>
+    public class ValidadorDisciplina : AbstractValidator<Disciplina>
     {
         public ValidadorDisciplina()
         {

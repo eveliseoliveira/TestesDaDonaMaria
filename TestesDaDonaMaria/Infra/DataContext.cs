@@ -15,7 +15,7 @@ namespace TestesDaDonaMaria.Infra
         {
             Testes = new List<Teste>();
             Questoes = new List<Questao>();
-            Disciplinas = new List<Materia>();
+            Disciplinas = new List<Disciplina>();
             Materias = new List<Materia>();
 
         }
@@ -28,7 +28,7 @@ namespace TestesDaDonaMaria.Infra
         }
 
         public List<Questao> Questoes { get; set; }
-        public List<Materia> Disciplinas { get; set; }
+        public List<Disciplina> Disciplinas { get; set; }
         public List <Materia> Materias { get; set; }
         public List<Teste> Testes { get; set; }
 

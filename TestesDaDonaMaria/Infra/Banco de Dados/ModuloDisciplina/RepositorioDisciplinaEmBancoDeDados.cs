@@ -150,7 +150,7 @@ namespace TestesDaDonaMaria.Infra.Banco_de_Dados.ModuloDisciplina
 
             while (leitorDisciplina.Read())
             {
-                Materia disciplina = ConverterParaDisciplina(leitorDisciplina);
+                Disciplina disciplina = ConverterParaDisciplina(leitorDisciplina);
 
                 disciplinas.Add(disciplina);
             }
